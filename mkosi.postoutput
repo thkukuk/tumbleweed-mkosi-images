@@ -12,4 +12,7 @@ qemu-img resize "${OUTPUTDIR}/${IMAGE}.qcow2" 40G
 qemu-img info "${OUTPUTDIR}/${IMAGE}.qcow2"
 
 # we don't need the image symlink without extension
-rm "${OUTPUTDIR}/${IMAGE}"
+rm -v "${OUTPUTDIR}/${IMAGE}"
+
+# we don't need the image.vmlinuz file
+rm -v "${OUTPUTDIR}/${IMAGE}.vmlinuz"
