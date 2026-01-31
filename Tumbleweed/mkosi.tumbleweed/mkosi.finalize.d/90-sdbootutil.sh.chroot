@@ -5,6 +5,10 @@ echo "*** Setup bootloader ***"
 
 rmdir /efi
 
+if [ "${SUBIMAGE}" == "NoNewPrivs" ]; then
+   SELINUX_PERMISSIVE="enforcing=0"
+fi
+
 #echo "Call sdbootutil install"
 #mkdir -p /boot/efi/{loader/entries,EFI/BOOT,EFI/systemd}
 #sdbootutil --esp-path=/boot/efi install
@@ -30,7 +34,7 @@ cat <<EOF > /boot/efi/loader/entries/opensuse-tumbleweed-"$kernel_ver".conf
 title openSUSE Tumbleweed
 version 1@$kernel_ver
 sort-key opensuse-tumbleweed
-options quiet systemd.show_status=yes security=selinux selinux=1
+options quiet systemd.show_status=yes security=selinux selinux=1 $SELINUX_PERMISSIVE
 linux /opensuse-tumbleweed/$kernel_ver/linux
 initrd /opensuse-tumbleweed/$kernel_ver/initrd
 EOF
