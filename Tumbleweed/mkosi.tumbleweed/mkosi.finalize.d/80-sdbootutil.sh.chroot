@@ -34,7 +34,7 @@ cat <<EOF > /boot/efi/loader/entries/opensuse-tumbleweed-"$kernel_ver".conf
 title openSUSE Tumbleweed
 version 1@$kernel_ver
 sort-key opensuse-tumbleweed
-options quiet systemd.show_status=yes security=selinux selinux=1 $SELINUX_PERMISSIVE
+options quiet systemd.show_status=yes console=ttyS0,115200 console=tty0 security=selinux selinux=1 $SELINUX_PERMISSIVE
 linux /opensuse-tumbleweed/$kernel_ver/linux
 initrd /opensuse-tumbleweed/$kernel_ver/initrd
 EOF
