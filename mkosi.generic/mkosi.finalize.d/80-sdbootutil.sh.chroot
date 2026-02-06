@@ -12,8 +12,11 @@ rmdir /efi
 if [ "${SUBIMAGE}" == "NoNewPrivs" ]; then
    SELINUX_PERMISSIVE="enforcing=0"
 fi
+
+ROOTFLAGS="root=LABEL=root-$ARCHITECTURE"
+
 if [ "${loader_token}" == "opensuse-microos" ]; then
-    ROOTFLAGS="root=LABEL=root-$ARCHITECTURE rootflags=subvol=@/.snapshots/1/snapshot"
+    ROOTFLAGS="$ROOTFLAGS rootflags=subvol=@/.snapshots/1/snapshot"
 fi
 
 #echo "Call sdbootutil install"
@@ -43,7 +46,7 @@ cat <<EOF > /boot/efi/loader/entries/"${loader_token}"-"$kernel_ver".conf
 title $title
 version 1@$kernel_ver
 sort-key $loader_token
-options quiet systemd.show_status=yes $ROOTFLAGS console=ttyS0,115200 console=tty0 security=selinux selinux=1 $SELINUX_PERMISSIVE
+options $ROOTFLAGS quiet systemd.show_status=yes console=ttyS0,115200 console=tty0 security=selinux selinux=1 $SELINUX_PERMISSIVE
 linux /$loader_token/$kernel_ver/linux
 initrd /$loader_token/$kernel_ver/initrd
 EOF
