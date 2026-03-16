@@ -14,7 +14,7 @@ case "$ARCHITECTURE" in
     aarch64) arch=aa64 ;;
     riscv64) arch=riscv64 ;;
     x86-64) arch=x64 ;;
-    *) echo "Unknown arch $arch"; exit 1 ;;
+    *) echo "Unknown arch $ARCHITECTURE"; exit 1 ;;
 esac
 
 if [ "${SUBIMAGE}" == "NoNewPrivs" ]; then
