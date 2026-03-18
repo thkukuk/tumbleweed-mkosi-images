@@ -42,7 +42,7 @@ sdbootutil -v --no-random-seed --arch "$arch" \
 	   --esp-path /boot/efi --entry-token=auto --no-variables \
 	   install
 
-# export hostonly_l=no # for dracut
+export hostonly_l=no # for dracut
 sdbootutil -v --arch "$arch" --esp-path /boot/efi --entry-token=auto \
 	   --rootfs="label" --rootfs-data="root-$ARCHITECTURE" \
 	   add-all-kernels
